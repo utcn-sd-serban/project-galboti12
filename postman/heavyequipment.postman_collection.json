@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "1ba811aa-7591-4962-80bf-48e7846b222e",
+		"name": "heavyequipment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/equipment/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "af94d43e-f19c-42ca-8f07-81485c5087e6",
+						"exec": [
+							"pm.test(\"Response statis is Ok, has body, is json\", function(){",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.withBody;",
+							"     pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"pm.test(\"Equipment list length > 3\", function(){",
+							"    var equipment = pm.response.json();",
+							"    pm.expect(equipment.length).to.be.above(3);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "boti",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "boti",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/equipment/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"equipment",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/equipment?name=case",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "75485527-e727-4234-9694-040f4cb0c63f",
+						"exec": [
+							"pm.test(\"Resulting equipment names include the searched string\", function(){\r",
+							"    var equipmentList = pm.response.json();\r",
+							"    var flag = true;\r",
+							"    for(var i = 0; i < equipmentList.length; i++) {\r",
+							"        if(!equipmentList[i].name.includes(\"ase\")) {\r",
+							"            flag = false;\r",
+							"        }\r",
+							"    }\r",
+							"    pm.expect(flag).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "boti",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "boti",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/equipment?name=ase",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"equipment"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "ase"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/equipment?typeId=9",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b781fb88-7e97-480f-bbda-86cfd988b117",
+						"exec": [
+							"pm.test(\"Resulting equipment are indeed excavators\", function(){\r",
+							"    var equipmentList = pm.response.json();\r",
+							"    for(var i = 0; i < equipmentList.length; i++) {\r",
+							"         pm.expect(equipmentList[i].typeName).to.eql(\"Excavator\");\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "boti",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "boti",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/equipment?typeId=9",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"equipment"
+					],
+					"query": [
+						{
+							"key": "typeId",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

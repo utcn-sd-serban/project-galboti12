@@ -3,6 +3,8 @@ package ro.utcn.sd.boti.heavyequipment.dto;
 import lombok.Data;
 import ro.utcn.sd.boti.heavyequipment.entity.Equipment;
 
+import java.sql.Blob;
+
 @Data
 public class EquipmentDTO {
     private Integer id;
